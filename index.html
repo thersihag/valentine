@@ -106,7 +106,7 @@
         @keyframes floatUp {
             from { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
             50% { opacity: 0.15; }
-            to { transform: translateY(-10vh) scale(1) rotate(360deg); opacity: 0; }
+            to { transform: translateY(-10vh) scale(1.1) rotate(360deg); opacity: 0; }
         }
 
         .record-player {
@@ -123,6 +123,14 @@
         .photo-placeholder {
             background: #fffafa; border: 1px dashed #fecaca;
             display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Music Specific Styles */
+        .music-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -208,7 +216,7 @@
         </div>
     </div>
 
-    <!-- 3. ANIMATED NOTE (DIARY STYLE - DENSE PHOTOS) -->
+    <!-- 3. ANIMATED NOTE -->
     <div id="note-page" class="page-transition fixed inset-0 bg-white flex-col items-center overflow-y-auto pt-8 pb-20 px-4 md:px-10">
         <button onclick="backToHub()" class="fixed top-6 left-5 text-[7px] font-bold uppercase text-rose-400 flex items-center gap-1 z-[60] bg-white/90 px-2 py-1 rounded-full"><i data-lucide="arrow-left" class="w-2.5"></i> Home</button>
         <div class="max-w-2xl w-full journal-paper p-6 md:p-10 rounded-r-2xl mt-8 min-h-[90vh]">
@@ -217,21 +225,31 @@
             </div>
             
             <div class="flex justify-between items-center mb-6 border-b border-rose-50 pb-1.5">
-                <span class="text-[7px] uppercase tracking-[0.2em] text-rose-300 font-bold italic">Archive: Our Journey</span>
+                <span class="text-[7px] uppercase tracking-[0.2em] text-rose-300 font-bold italic">Ladddduuuu</span>
                 <span class="text-[7px] italic text-gray-300 italic">Page 01</span>
             </div>
+ <div class="tape-photo w-24 h-32 transform -rotate-1">
+    <img src="438.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm">
+</div>
 
-            <h2 class="cursive text-3xl text-rose-500 mb-4 pt-2">Priyanshi,</h2>
+            <h2 class="cursive text-3xl text-rose-500 mb-4 pt-2">TO Dear Ladddu,</h2>
 
             <div class="journal-font space-y-4">
                 <p>Har roz jab main WhatsApp kholta hoon aur tumhara naam screen par dikhta hai, mujhe lagta hai meri duniya start ho gayi. Jaise phone unlock karte hi sab kuch normal se special ho jaata hai. Tumhare “hmmm”, “achaaa”, “pagal ho kya?”, “jaan…” ye sirf words nahi hain. Ye mere din ka mood set karte hain. Agar tum reply late karo na, toh pura din ajeeb lagta hai. Aur agar tum ek simple sa “khana kha liya?” bhej do, toh lagta hai duniya me sab theek hai.</p>
                 
                 <div class="flex gap-4 my-4">
-                    <div class="tape-photo w-24 h-32 transform -rotate-1">
-                        <div class="w-full h-full photo-placeholder rounded-sm"><i data-lucide="image" class="w-3 h-3 text-rose-50"></i></div>
-                    </div>
+                   <div class="tape-photo w-24 h-32 transform -rotate-1">
+    <img src="328.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm">
+</div>
+
                     <div class="tape-photo w-24 h-32 transform rotate-2">
-                        <div class="w-full h-full photo-placeholder rounded-sm"><i data-lucide="image" class="w-3 h-3 text-rose-50"></i></div>
+                        <div class="w-full h-full photo-placeholder rounded-sm"> <img src="398.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
                     </div>
                 </div>
 
@@ -239,7 +257,9 @@
 
                 <div class="tape-photo w-full h-36 my-4">
                     <div class="w-full h-full photo-placeholder rounded-sm flex items-center justify-center">
-                         <span class="text-[7px] text-gray-200 tracking-[0.5em] uppercase">Chai Sutta Bar Days</span>
+                         <img src="378.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm">
                     </div>
                 </div>
 
@@ -248,16 +268,24 @@
                 <p>Tumhari ek baat mujhe sabse zyada pasand hai — tum mujhe daantti bhi ho aur care bhi karti ho. Jab main overthink karta hoon, tum simple sa bol deti ho, “itna mat socha karo, main hoon na.” Ye chaar words mere liye therapy hain. Jab main irritate hota hoon, tum patience se handle karti ho. Jab main galti karta hoon, tum mujhe samjhati ho. Har baar maaf karna easy nahi hota, par tumne kiya. Aur ye main kabhi bhool nahi sakta.</p>
 
                 <div class="flex gap-3 my-4 overflow-x-auto pb-2 no-scrollbar">
-                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[-3deg]"></div>
-                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[4deg]"></div>
-                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[-2deg]"></div>
+                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[-3deg]"> <img src="78.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
+                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[4deg]"> <img src="38.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
+                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[-2deg]"> <img src="8.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
                 </div>
 
                 <p><b>19 September</b> ka din meri life ka sabse special din rahega. Tum pink-peach kurti me, light sky-blue jeans me, white sneakers ke saath, open hair aur haath me bouquet liye hue. Main bas tumhe dekh raha tha. Jab tum mere paas aayi aur humne pehla hug kiya, mujhe laga ki jitni bhi dooriyan thi sab khatam ho gayi. Wo first hug, wo first kiss, wo forehead kiss — sab kuch itna pure tha ki main words me explain nahi kar sakta.</p>
 
                 <div class="tape-photo w-full h-44 my-4 border-2 border-rose-50">
                     <div class="w-full h-full photo-placeholder bg-rose-50 flex items-center justify-center">
-                         <i data-lucide="camera" class="w-6 h-6 text-rose-200"></i>
+                     <img src="458.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm">
                     </div>
                 </div>
 
@@ -269,13 +297,13 @@
 
                 <div class="mt-8 text-center pt-6 border-t border-rose-50">
                     <p class="cursive text-3xl text-rose-500">Tum ho toh sab hai. ❤️</p>
-                    <p class="text-[6px] uppercase tracking-[0.4em] text-gray-300 mt-2">End of Journal Entry</p>
+                    <p class="text-[6px] uppercase tracking-[0.4em] text-gray-300 mt-2">LOVEEEEE YOUUUUU</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 4. VIRTUAL HUG PAGE (DIARY STYLE) -->
+    <!-- 4. VIRTUAL HUG PAGE -->
     <div id="hug-page" class="page-transition fixed inset-0 bg-white flex-col items-center overflow-y-auto pt-8 pb-20 px-4 md:px-10">
         <button onclick="backToHub()" class="fixed top-6 left-5 text-[7px] font-bold uppercase text-rose-400 flex items-center gap-1 z-[60] bg-white/90 px-2 py-1 rounded-full"><i data-lucide="arrow-left" class="w-2.5"></i> Home</button>
         <div class="max-w-2xl w-full journal-paper p-6 md:p-10 rounded-r-2xl mt-8 min-h-[60vh]">
@@ -286,29 +314,55 @@
             <div class="journal-font space-y-3">
                 <p>19 September ka wo pehla hug yaad hai? Civil Line ki hawa, tumhari halki si nervous smile, aur jab tum mere paas aayi… us moment me time ruk gaya tha. Par us din se pehle bhi hazaaron virtual hugs the.</p>
                 <p>Jab tum hostel me ro deti thi aur main sirf message bhej pata tha — “idhar aa jao, tight hug.” Jab tumhari tabiyat kharab hoti thi aur main phone ke through hi keh pata tha — “apna khayal rakho, meri jaan ho.”</p>
-                <div class="tape-photo w-32 h-32 mx-auto my-4 transform rotate-2"></div>
+                <div class="tape-photo w-32 h-32 mx-auto my-4 transform rotate-2"> <img src="us1.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
                 <p>Virtual hug ka matlab sirf emoji nahi hota. Wo trust hota hai. Wo reassurance hota hai. Wo yeh hota hai ki chahe duniya kitni bhi against ho jaye, ek insaan hai jo tumhe kabhi chhodkar nahi jayega.</p>
                 <p>Chahe future me kitne bhi problems aayein, hum kabhi alag nahi honge. Duniya se ladenge, par ek dusre se nahi. Aur jab tak officially saath nahi hote, tab tak har raat ek virtual hug mandatory hai. ❤️</p>
             </div>
         </div>
     </div>
 
-    <!-- 5. MUSIC PAGE -->
+    <!-- 5. MUSIC PAGE (Updated with Playlist Logic) -->
     <div id="music-page" class="page-transition fixed inset-0 bg-white flex-col items-center justify-center p-10">
         <button onclick="backToHub()" class="absolute top-8 left-6 text-[7px] font-bold uppercase text-rose-400"><i data-lucide="arrow-left" class="w-3 inline"></i> Home</button>
+        
+        <audio id="main-audio" src="music1.mp3"></audio>
+
         <div id="player-ui" class="flex flex-col items-center">
-            <div class="relative w-40 h-40 mb-8">
-                <div class="record-player absolute inset-0 rounded-full border-[6px] border-rose-50 shadow-md flex items-center justify-center overflow-hidden">
-                    <div class="w-full h-full bg-rose-50 flex items-center justify-center">
-                        <i data-lucide="disc" class="w-6 h-6 text-rose-200"></i>
+            <div class="relative w-48 h-48 mb-8">
+                <div class="record-player absolute inset-0 rounded-full border-[8px] border-rose-50 shadow-md flex items-center justify-center overflow-hidden">
+                    <img id="music-thumbnail" src="music1.jpg" class="music-thumb" onerror="this.src='https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400';">
+                    <div class="absolute inset-0 bg-black/5 flex items-center justify-center pointer-events-none">
+                         <i data-lucide="disc" class="w-6 h-6 text-white/50"></i>
                     </div>
                 </div>
             </div>
-            <h3 class="serif text-base font-bold mb-0.5">Infinite Archive Soundtrack</h3>
-            <p class="text-rose-400 text-[6px] uppercase tracking-widest mb-6 italic">"Distance is but a test..."</p>
-            <button onclick="toggleMusic()" class="w-12 h-12 bg-rose-500 rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-transform">
-                <i data-lucide="play" id="music-icon" class="fill-current text-white w-4 h-4"></i>
-            </button>
+            
+            <h3 id="song-title" class="serif text-base font-bold mb-0.5 uppercase tracking-widest text-rose-900">Track 01</h3>
+            <p class="text-rose-400 text-[6px] uppercase tracking-widest mb-8 italic">"Hamari Love Playlist"</p>
+            
+            <div class="flex items-center gap-6">
+                <button onclick="prevSong()" class="text-rose-300 hover:text-rose-500 transition-colors">
+                    <i data-lucide="skip-back" class="w-5 h-5"></i>
+                </button>
+                
+                <button onclick="toggleMusic()" class="w-14 h-14 bg-rose-500 rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-transform">
+                    <i data-lucide="play" id="music-icon" class="fill-current text-white w-5 h-5 ml-1"></i>
+                </button>
+                
+                <button onclick="nextSong()" class="text-rose-300 hover:text-rose-500 transition-colors">
+                    <i data-lucide="skip-forward" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div class="mt-10 flex gap-2">
+                <div id="dot-1" class="w-1.5 h-1.5 rounded-full bg-rose-500"></div>
+                <div id="dot-2" class="w-1.5 h-1.5 rounded-full bg-rose-100"></div>
+                <div id="dot-3" class="w-1.5 h-1.5 rounded-full bg-rose-100"></div>
+                <div id="dot-4" class="w-1.5 h-1.5 rounded-full bg-rose-100"></div>
+                <div id="dot-5" class="w-1.5 h-1.5 rounded-full bg-rose-100"></div>
+            </div>
         </div>
     </div>
 
@@ -348,10 +402,18 @@
         <div class="max-w-2xl w-full text-center">
             
             <div class="grid grid-cols-2 gap-3 mb-8 px-4">
-                <div class="tape-photo h-36"></div>
-                <div class="tape-photo h-36 transform rotate-2"></div>
-                <div class="tape-photo h-36 transform -rotate-2"></div>
-                <div class="tape-photo h-36"></div>
+                <div class="tape-photo h-36"> <img src="17.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
+                <div class="tape-photo h-36 transform rotate-2"> <img src="16.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
+                <div class="tape-photo h-36 transform -rotate-2"> <img src="288.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
+                <div class="tape-photo h-36"> <img src="53.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm"></div>
             </div>
 
             <h2 class="serif text-2xl mb-3 text-rose-900 italic font-bold">Infinite Promise.</h2>
@@ -361,8 +423,9 @@
             
             <div class="tape-photo w-48 h-64 mx-auto mb-8">
                  <div class="w-full h-full photo-placeholder bg-rose-50 flex flex-col items-center justify-center">
-                      <i data-lucide="camera" class="w-8 h-8 text-rose-100"></i>
-                      <span class="text-[6px] text-rose-200 mt-2 uppercase font-bold tracking-widest italic">The One</span>
+                     <img src="us1.jpg" 
+         alt="Photo" 
+         class="w-full h-full object-cover rounded-sm">
                  </div>
             </div>
 
@@ -420,6 +483,9 @@
             setTimeout(() => {
                 const hub = document.getElementById('page-dashboard');
                 if (hub) hub.classList.add('active');
+                
+                // Stop music UI visually but keep audio playing if preferred, 
+                // but usually player UI should reset visually.
                 document.getElementById('player-ui')?.classList.remove('playing');
             }, 100);
         }
@@ -451,16 +517,72 @@
             }
         }
 
-        let playing = false;
+        // MUSIC PLAYLIST LOGIC
+        let currentSong = 1;
+        const totalSongs = 5;
+        const audio = document.getElementById('main-audio');
+        const playIcon = document.getElementById('music-icon');
+        const songTitle = document.getElementById('song-title');
+        const musicThumb = document.getElementById('music-thumbnail');
+        const playerUI = document.getElementById('player-ui');
+
+        function updateSongUI() {
+            songTitle.innerText = `Track 0${currentSong}`;
+            musicThumb.src = `music${currentSong}.jpg`;
+            audio.src = `music${currentSong}.mp3`;
+            
+            // Update dots
+            for(let i=1; i<=5; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if(i === currentSong) {
+                    dot.classList.remove('bg-rose-100');
+                    dot.classList.add('bg-rose-500');
+                } else {
+                    dot.classList.add('bg-rose-100');
+                    dot.classList.remove('bg-rose-500');
+                }
+            }
+        }
+
         function toggleMusic() {
-            playing = !playing;
-            const icon = document.getElementById('music-icon');
-            const player = document.getElementById('player-ui');
-            if (playing) player.classList.add('playing');
-            else player.classList.remove('playing');
-            icon.setAttribute('data-lucide', playing ? 'pause' : 'play');
+            if (audio.paused) {
+                audio.play();
+                playerUI.classList.add('playing');
+                playIcon.setAttribute('data-lucide', 'pause');
+            } else {
+                audio.pause();
+                playerUI.classList.remove('playing');
+                playIcon.setAttribute('data-lucide', 'play');
+            }
             lucide.createIcons();
         }
+
+        function nextSong() {
+            currentSong = currentSong < totalSongs ? currentSong + 1 : 1;
+            const wasPlaying = !audio.paused;
+            updateSongUI();
+            if (wasPlaying) {
+                audio.play();
+                playerUI.classList.add('playing');
+                playIcon.setAttribute('data-lucide', 'pause');
+            }
+            lucide.createIcons();
+        }
+
+        function prevSong() {
+            currentSong = currentSong > 1 ? currentSong - 1 : totalSongs;
+            const wasPlaying = !audio.paused;
+            updateSongUI();
+            if (wasPlaying) {
+                audio.play();
+                playerUI.classList.add('playing');
+                playIcon.setAttribute('data-lucide', 'pause');
+            }
+            lucide.createIcons();
+        }
+
+        // Listen for track end to play next
+        audio.onended = nextSong;
 
         function startFX() {
             setInterval(() => {
