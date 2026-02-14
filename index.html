@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Priyanshi Anthology | Forever Private</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&family=Dancing+Script:wght@600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --rose-primary: #ff85a2;
+            --rose-soft: #fff1f2;
+            --rose-deep: #fb7185;
+            --bg-light: #fffafa;
+            --text-dark: #2d1619;
+            --paper-line: #eceef1;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            font-size: 0.85rem;
+        }
+
+        .serif { font-family: 'Playfair Display', serif; }
+        .cursive { font-family: 'Dancing Script', cursive; }
+        .journal-font { 
+            font-family: 'Lora', serif; 
+            font-size: 0.72rem; 
+            line-height: 20px; 
+            font-style: italic;
+            color: #444;
+        }
+        
+        .page-transition {
+            display: none;
+            opacity: 0;
+            transform: scale(0.99);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .page-transition.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Journal Notebook Style */
+        .journal-paper {
+            background: white;
+            background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+            background-size: 100% 20px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            padding-left: 45px !important;
+            border-left: 1px solid #f3ece0;
+        }
+        .journal-paper::before {
+            content: '';
+            position: absolute;
+            left: 38px; top: 0; bottom: 0; width: 1px;
+            background: #ffcfcf; 
+        }
+
+        .spiral-binder {
+            position: absolute; left: 6px; top: 15px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .spiral-ring {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            border: 1px solid #adb9ca;
+        }
+
+        .tape-photo {
+            position: relative; background: white; padding: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: inline-block;
+            max-width: 100%;
+        }
+        .tape-photo::before {
+            content: ''; position: absolute; top: -6px; left: 50%;
+            transform: translateX(-50%) rotate(-1deg); width: 45px; height: 14px;
+            background: rgba(254, 205, 211, 0.4); backdrop-filter: blur(1px); z-index: 10;
+        }
+
+        .otp-input {
+            width: 32px; height: 40px; background: transparent;
+            border-bottom: 1.5px solid #fecdd3; text-align: center;
+            font-size: 1.1rem; outline: none; transition: all 0.3s;
+        }
+        .otp-input:focus { border-color: var(--rose-primary); }
+
+        .bento-card {
+            background: white; border: 1px solid #f9f0f2;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .bento-card:hover { transform: translateY(-3px); border-color: var(--rose-primary); }
+
+        .bg-heart {
+            position: fixed; pointer-events: none; z-index: -1;
+            opacity: 0.1; animation: floatUp 8s linear infinite;
+        }
+        @keyframes floatUp {
+            from { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.15; }
+            to { transform: translateY(-10vh) scale(1) rotate(360deg); opacity: 0; }
+        }
+
+        .record-player {
+            animation: spin 8s linear infinite; animation-play-state: paused;
+        }
+        .playing .record-player { animation-play-state: running; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .gallery-image {
+            width: 100%; aspect-ratio: 1/1; object-fit: cover;
+            border-radius: 1px; background: #faf5f5;
+        }
+
+        .photo-placeholder {
+            background: #fffafa; border: 1px dashed #fecaca;
+            display: flex; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-[#fffdfd]">
+
+    <!-- 1. AUTH SCREEN -->
+    <div id="auth-screen" class="fixed inset-0 z-[100] bg-white flex items-center justify-center p-6 page-transition active">
+        <div class="max-w-md w-full text-center">
+            <div class="mb-10">
+                <div class="w-14 h-14 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i data-lucide="lock" class="w-5 h-5 text-rose-400"></i>
+                </div>
+                <h1 class="serif text-lg font-bold text-rose-900 tracking-widest uppercase">The Private Entry</h1>
+                <p class="text-[7px] uppercase tracking-[0.3em] text-rose-300 mt-2 font-semibold">Authorized Access for Priyanshi Only</p>
+            </div>
+            
+            <div class="flex justify-center gap-3 mb-8">
+                <input type="password" id="i1" maxlength="1" oninput="moveNext(this, 'i2')" class="otp-input" autocomplete="off">
+                <input type="password" id="i2" maxlength="1" oninput="moveNext(this, 'i3')" class="otp-input" autocomplete="off">
+                <input type="password" id="i3" maxlength="1" oninput="moveNext(this, 'i4')" class="otp-input" autocomplete="off">
+                <input type="password" id="i4" maxlength="1" oninput="validatePin(this)" class="otp-input" autocomplete="off">
+            </div>
+            
+            <p id="error-msg" class="text-rose-500 text-[8px] font-bold uppercase hidden">Encryption Error: Invalid Key</p>
+        </div>
+    </div>
+
+    <!-- 2. MAIN HUB -->
+    <div id="page-dashboard" class="page-transition min-h-screen flex-col items-center py-8 px-4 max-w-6xl mx-auto overflow-y-auto">
+        <header class="text-center mb-8 w-full">
+            <div class="mb-2 inline-block px-3 py-0.5 bg-rose-50 rounded-full text-[7px] font-bold text-rose-500 uppercase tracking-[0.3em]">Volume 18.11</div>
+            <h1 class="serif text-2xl md:text-4xl text-rose-900 font-bold tracking-tight">The Priyanshi Anthology</h1>
+            <p class="cursive text-lg text-rose-400 mt-0.5">A curated soul-archive</p>
+        </header>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 w-full pb-10">
+            <!-- Main Letter Card -->
+            <div onclick="navigateTo('note-page')" class="bento-card col-span-2 p-5 rounded-[1.5rem] flex flex-col justify-between h-36">
+                <div class="w-6 h-6 bg-rose-50 text-rose-400 rounded flex items-center justify-center"><i data-lucide="feather" class="w-3 h-3"></i></div>
+                <div>
+                    <h3 class="serif text-sm font-bold">Animated Note</h3>
+                    <p class="text-[7px] text-gray-400 uppercase tracking-widest italic">Personal Journal Entry</p>
+                </div>
+            </div>
+
+            <!-- Virtual Hug -->
+            <div onclick="navigateTo('hug-page')" class="bento-card p-3 rounded-[1.5rem] flex flex-col justify-between items-center text-center h-36">
+                <div class="w-full h-16 photo-placeholder rounded-xl mb-1">
+                    <i data-lucide="heart" class="w-3 h-3 text-rose-100"></i>
+                </div>
+                <span class="text-[7px] font-bold uppercase tracking-widest text-rose-400">Virtual Hug</span>
+            </div>
+
+            <!-- Music -->
+            <div onclick="navigateTo('music-page')" class="bento-card p-3 rounded-[1.5rem] flex flex-col justify-between items-center text-center h-36">
+                <div class="w-full h-16 photo-placeholder rounded-xl mb-1" style="transform: rotate(1deg)">
+                    <i data-lucide="music" class="w-3 h-3 text-rose-100"></i>
+                </div>
+                <span class="text-[7px] font-bold uppercase tracking-widest text-rose-400">Archive Playlist</span>
+            </div>
+
+            <!-- Gallery -->
+            <div onclick="navigateTo('collage-page')" class="bento-card col-span-1 p-3 rounded-[1.5rem] flex flex-col items-center justify-center h-36 bg-rose-50 border-none">
+                <i data-lucide="layout-grid" class="w-4 h-4 text-rose-300 mb-1.5"></i>
+                <span class="text-[7px] font-bold uppercase text-rose-900 tracking-widest">Memories 1-500</span>
+            </div>
+
+            <!-- Letter Link -->
+            <div onclick="navigateTo('letter-page')" class="bento-card col-span-2 p-5 rounded-[1.5rem] flex flex-row items-center gap-4 h-36">
+                <div class="w-16 h-16 photo-placeholder rounded-xl shrink-0">
+                    <i data-lucide="pen-tool" class="w-3 h-3 text-rose-100"></i>
+                </div>
+                <div>
+                    <h3 class="serif text-sm font-bold">The Diary</h3>
+                    <p class="text-[7px] text-gray-400 uppercase tracking-widest">Handwritten Thoughts</p>
+                </div>
+            </div>
+
+            <!-- Star / Finale -->
+            <div onclick="navigateTo('finale-page')" class="bento-card col-span-1 p-3 rounded-[1.5rem] h-36 flex items-center justify-center bg-rose-500 border-none text-white shadow-md">
+                <i data-lucide="star" class="w-5 h-5 animate-pulse"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. ANIMATED NOTE (DIARY STYLE - DENSE PHOTOS) -->
+    <div id="note-page" class="page-transition fixed inset-0 bg-white flex-col items-center overflow-y-auto pt-8 pb-20 px-4 md:px-10">
+        <button onclick="backToHub()" class="fixed top-6 left-5 text-[7px] font-bold uppercase text-rose-400 flex items-center gap-1 z-[60] bg-white/90 px-2 py-1 rounded-full"><i data-lucide="arrow-left" class="w-2.5"></i> Home</button>
+        <div class="max-w-2xl w-full journal-paper p-6 md:p-10 rounded-r-2xl mt-8 min-h-[90vh]">
+            <div class="spiral-binder">
+                <div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div>
+            </div>
+            
+            <div class="flex justify-between items-center mb-6 border-b border-rose-50 pb-1.5">
+                <span class="text-[7px] uppercase tracking-[0.2em] text-rose-300 font-bold italic">Archive: Our Journey</span>
+                <span class="text-[7px] italic text-gray-300 italic">Page 01</span>
+            </div>
+
+            <h2 class="cursive text-3xl text-rose-500 mb-4 pt-2">Priyanshi,</h2>
+
+            <div class="journal-font space-y-4">
+                <p>Har roz jab main WhatsApp kholta hoon aur tumhara naam screen par dikhta hai, mujhe lagta hai meri duniya start ho gayi. Jaise phone unlock karte hi sab kuch normal se special ho jaata hai. Tumhare “hmmm”, “achaaa”, “pagal ho kya?”, “jaan…” ye sirf words nahi hain. Ye mere din ka mood set karte hain. Agar tum reply late karo na, toh pura din ajeeb lagta hai. Aur agar tum ek simple sa “khana kha liya?” bhej do, toh lagta hai duniya me sab theek hai.</p>
+                
+                <div class="flex gap-4 my-4">
+                    <div class="tape-photo w-24 h-32 transform -rotate-1">
+                        <div class="w-full h-full photo-placeholder rounded-sm"><i data-lucide="image" class="w-3 h-3 text-rose-50"></i></div>
+                    </div>
+                    <div class="tape-photo w-24 h-32 transform rotate-2">
+                        <div class="w-full h-full photo-placeholder rounded-sm"><i data-lucide="image" class="w-3 h-3 text-rose-50"></i></div>
+                    </div>
+                </div>
+
+                <p>Hamari story kisi perfect love story jaisi seedhi nahi thi. Shuruat hui ek random Instagram group se — <b>Chai Sutta Bar</b>. Phir beech me wo fake admin wala confusion, meri stupid reaction, tumhara hurt hona, phir meri realization aur apology. Shayad wahi se sach me hamari kahani start hui. Kyunki agar tum us din mujhe ignore kar deti na, toh shayad aaj main itna lucky nahi hota.</p>
+
+                <div class="tape-photo w-full h-36 my-4">
+                    <div class="w-full h-full photo-placeholder rounded-sm flex items-center justify-center">
+                         <span class="text-[7px] text-gray-200 tracking-[0.5em] uppercase">Chai Sutta Bar Days</span>
+                    </div>
+                </div>
+
+                <p>Phir dheere dheere chats badhni shuru hui. Pehle normal talks. Phir thoda personal. Phir Snapchat streaks. Phir late night calls. Phir good morning aur good night ke messages compulsory ho gaye. Mujhe yaad hai wo din jab tumne bola tha, “tum alag ho.” Us din se maine khud ko alag feel karna shuru kiya — sirf tumhare liye.</p>
+
+                <p>Tumhari ek baat mujhe sabse zyada pasand hai — tum mujhe daantti bhi ho aur care bhi karti ho. Jab main overthink karta hoon, tum simple sa bol deti ho, “itna mat socha karo, main hoon na.” Ye chaar words mere liye therapy hain. Jab main irritate hota hoon, tum patience se handle karti ho. Jab main galti karta hoon, tum mujhe samjhati ho. Har baar maaf karna easy nahi hota, par tumne kiya. Aur ye main kabhi bhool nahi sakta.</p>
+
+                <div class="flex gap-3 my-4 overflow-x-auto pb-2 no-scrollbar">
+                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[-3deg]"></div>
+                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[4deg]"></div>
+                    <div class="tape-photo w-20 h-28 shrink-0 transform rotate-[-2deg]"></div>
+                </div>
+
+                <p><b>19 September</b> ka din meri life ka sabse special din rahega. Tum pink-peach kurti me, light sky-blue jeans me, white sneakers ke saath, open hair aur haath me bouquet liye hue. Main bas tumhe dekh raha tha. Jab tum mere paas aayi aur humne pehla hug kiya, mujhe laga ki jitni bhi dooriyan thi sab khatam ho gayi. Wo first hug, wo first kiss, wo forehead kiss — sab kuch itna pure tha ki main words me explain nahi kar sakta.</p>
+
+                <div class="tape-photo w-full h-44 my-4 border-2 border-rose-50">
+                    <div class="w-full h-full photo-placeholder bg-rose-50 flex items-center justify-center">
+                         <i data-lucide="camera" class="w-6 h-6 text-rose-200"></i>
+                    </div>
+                </div>
+
+                <p>Resultant me baithna. Bombay Taste me hasi. Civil Line ki walk. Subhedhar Ganj Station ke paas ki baatein. Sangam par khade hokar future ki baat karna. Har jagah tum thi, aur tumhare saath main complete tha. Priyanshi, main perfect nahi hoon. Kabhi kabhi ziddi ho jaata hoon. Kabhi overthink karta hoon. Kabhi unnecessary react kar deta hoon. Par ek cheez pakki hai — main tumhe kabhi intentionally hurt nahi chahta.</p>
+
+                <p>Hamne decide kiya hai na — kabhi alag nahi honge. Duniya se lad lenge, par ek dusre ka haath nahi chhodenge. Efforts end tak karenge. Aur end tab nahi aayega jab tak hum officially saath nahi hote. Tum meri life ka sabse real part ho. Koi filter nahi. Koi acting nahi. Sirf sachcha pyaar.</p>
+
+                <p>Aur haan… agar kabhi future me tum ye padho, toh yaad rakhna — ek ladka hai jo tumhe har roz choose karta hai. Har fight ke baad bhi. Har misunderstanding ke baad bhi. Har situation me.</p>
+
+                <div class="mt-8 text-center pt-6 border-t border-rose-50">
+                    <p class="cursive text-3xl text-rose-500">Tum ho toh sab hai. ❤️</p>
+                    <p class="text-[6px] uppercase tracking-[0.4em] text-gray-300 mt-2">End of Journal Entry</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. VIRTUAL HUG PAGE (DIARY STYLE) -->
+    <div id="hug-page" class="page-transition fixed inset-0 bg-white flex-col items-center overflow-y-auto pt-8 pb-20 px-4 md:px-10">
+        <button onclick="backToHub()" class="fixed top-6 left-5 text-[7px] font-bold uppercase text-rose-400 flex items-center gap-1 z-[60] bg-white/90 px-2 py-1 rounded-full"><i data-lucide="arrow-left" class="w-2.5"></i> Home</button>
+        <div class="max-w-2xl w-full journal-paper p-6 md:p-10 rounded-r-2xl mt-8 min-h-[60vh]">
+            <div class="spiral-binder">
+                <div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div>
+            </div>
+            <h2 class="cursive text-2xl text-rose-500 mb-4 pt-2">Laddddduuuuu,</h2>
+            <div class="journal-font space-y-3">
+                <p>19 September ka wo pehla hug yaad hai? Civil Line ki hawa, tumhari halki si nervous smile, aur jab tum mere paas aayi… us moment me time ruk gaya tha. Par us din se pehle bhi hazaaron virtual hugs the.</p>
+                <p>Jab tum hostel me ro deti thi aur main sirf message bhej pata tha — “idhar aa jao, tight hug.” Jab tumhari tabiyat kharab hoti thi aur main phone ke through hi keh pata tha — “apna khayal rakho, meri jaan ho.”</p>
+                <div class="tape-photo w-32 h-32 mx-auto my-4 transform rotate-2"></div>
+                <p>Virtual hug ka matlab sirf emoji nahi hota. Wo trust hota hai. Wo reassurance hota hai. Wo yeh hota hai ki chahe duniya kitni bhi against ho jaye, ek insaan hai jo tumhe kabhi chhodkar nahi jayega.</p>
+                <p>Chahe future me kitne bhi problems aayein, hum kabhi alag nahi honge. Duniya se ladenge, par ek dusre se nahi. Aur jab tak officially saath nahi hote, tab tak har raat ek virtual hug mandatory hai. ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. MUSIC PAGE -->
+    <div id="music-page" class="page-transition fixed inset-0 bg-white flex-col items-center justify-center p-10">
+        <button onclick="backToHub()" class="absolute top-8 left-6 text-[7px] font-bold uppercase text-rose-400"><i data-lucide="arrow-left" class="w-3 inline"></i> Home</button>
+        <div id="player-ui" class="flex flex-col items-center">
+            <div class="relative w-40 h-40 mb-8">
+                <div class="record-player absolute inset-0 rounded-full border-[6px] border-rose-50 shadow-md flex items-center justify-center overflow-hidden">
+                    <div class="w-full h-full bg-rose-50 flex items-center justify-center">
+                        <i data-lucide="disc" class="w-6 h-6 text-rose-200"></i>
+                    </div>
+                </div>
+            </div>
+            <h3 class="serif text-base font-bold mb-0.5">Infinite Archive Soundtrack</h3>
+            <p class="text-rose-400 text-[6px] uppercase tracking-widest mb-6 italic">"Distance is but a test..."</p>
+            <button onclick="toggleMusic()" class="w-12 h-12 bg-rose-500 rounded-full flex items-center justify-center shadow-sm active:scale-90 transition-transform">
+                <i data-lucide="play" id="music-icon" class="fill-current text-white w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 6. DIARY PAGE (LETTER) -->
+    <div id="letter-page" class="page-transition fixed inset-0 bg-[#fbf9f7] flex-col items-center justify-center p-6 overflow-y-auto">
+        <button onclick="backToHub()" class="absolute top-8 left-6 text-[7px] font-bold uppercase text-rose-400"><i data-lucide="arrow-left" class="w-3 inline"></i> Home</button>
+        <div class="max-w-md w-full journal-paper p-8 rounded-r-2xl border-rose-100 min-h-[400px]">
+             <div class="spiral-binder">
+                <div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div><div class="spiral-ring"></div>
+            </div>
+            <h3 class="cursive text-2xl mb-4 text-rose-500 pt-2">Dear Priyanshi,</h3>
+            <div class="journal-font space-y-2 italic text-gray-600">
+                <p>Aaj agar main pen uthau aur paper par likhu, toh sabse pehla word hoga — “Tum.”</p>
+                <p>Yaad hai jab main Pooja ke baare me bataya tha? Maine kabhi kisi ko itna open hoke share nahi kiya tha. Par tumne mujhe samjha. Maine tumhe pure dil se choose kiya hai. Main last tak efforts karunga. End kabhi aayega hi nahi.</p>
+            </div>
+            <div class="mt-8 text-right px-4">
+                <p class="cursive text-xl text-rose-400">Tera Pagal. ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. INFINITE ALBUM GALLERY (1 to 500) -->
+    <div id="collage-page" class="page-transition fixed inset-0 bg-[#fdfdfd] flex-col items-center overflow-y-auto pt-16 pb-12 px-4">
+        <button onclick="backToHub()" class="fixed top-6 left-5 text-[7px] font-bold uppercase text-rose-400 z-[120] bg-white/90 p-2 rounded-full shadow-sm flex items-center gap-1"><i data-lucide="arrow-left" class="w-2.5 inline"></i> Home</button>
+        <div class="text-center mb-6 mt-8">
+            <h2 class="serif text-xl text-rose-900 font-bold">Hamari Private Album</h2>
+            <p class="cursive text-base text-rose-400">Memories 1-500</p>
+        </div>
+        <div id="gallery-grid" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 w-full max-w-6xl">
+            <!-- Dynamically injected -->
+        </div>
+    </div>
+
+    <!-- 8. FINALE (WITH MORE PHOTOS) -->
+    <div id="finale-page" class="page-transition fixed inset-0 bg-white flex-col items-center overflow-y-auto pt-14 pb-20 px-4">
+        <button onclick="backToHub()" class="fixed top-6 left-5 text-[7px] font-bold uppercase text-rose-400 z-50"><i data-lucide="arrow-left" class="w-2.5 inline"></i> Home</button>
+        <div class="max-w-2xl w-full text-center">
+            
+            <div class="grid grid-cols-2 gap-3 mb-8 px-4">
+                <div class="tape-photo h-36"></div>
+                <div class="tape-photo h-36 transform rotate-2"></div>
+                <div class="tape-photo h-36 transform -rotate-2"></div>
+                <div class="tape-photo h-36"></div>
+            </div>
+
+            <h2 class="serif text-2xl mb-3 text-rose-900 italic font-bold">Infinite Promise.</h2>
+            <div class="journal-font text-gray-500 px-6 text-[0.65rem] italic leading-relaxed mb-6">
+                Priyanshi, tum meri safe place ho. Main promise karta hoon ki duniya se ladenge, par ek dusre se nahi. Tu meri peace hai. 19 Sept hamesha yaad rahega. Hum kabhi alag nahi honge, ye archive gawah hai.
+            </div>
+            
+            <div class="tape-photo w-48 h-64 mx-auto mb-8">
+                 <div class="w-full h-full photo-placeholder bg-rose-50 flex flex-col items-center justify-center">
+                      <i data-lucide="camera" class="w-8 h-8 text-rose-100"></i>
+                      <span class="text-[6px] text-rose-200 mt-2 uppercase font-bold tracking-widest italic">The One</span>
+                 </div>
+            </div>
+
+            <p class="cursive text-2xl text-rose-400">Yours, Always & Forever. ❤️</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function moveNext(curr, nextId) {
+            if (curr.value.length >= 1) {
+                const next = document.getElementById(nextId);
+                if (next) next.focus();
+            }
+        }
+
+        function validatePin(el) {
+            const p1 = document.getElementById('i1').value;
+            const p2 = document.getElementById('i2').value;
+            const p3 = document.getElementById('i3').value;
+            const p4 = el.value;
+            const pin = p1 + p2 + p3 + p4;
+
+            if (pin === "1811") {
+                const auth = document.getElementById('auth-screen');
+                auth.classList.remove('active');
+                setTimeout(() => {
+                    auth.style.display = 'none';
+                    document.getElementById('page-dashboard').classList.add('active');
+                    startFX();
+                    initInfiniteGallery();
+                }, 600);
+            } else if (pin.length === 1) {
+                document.getElementById('error-msg').classList.remove('hidden');
+                ['i1', 'i2', 'i3', 'i4'].forEach(id => document.getElementById(id).value = "");
+                document.getElementById('i1').focus();
+                setTimeout(() => document.getElementById('error-msg').classList.add('hidden'), 2000);
+            }
+        }
+
+        function navigateTo(id) {
+            document.querySelectorAll('.page-transition').forEach(p => p.classList.remove('active'));
+            setTimeout(() => {
+                const target = document.getElementById(id);
+                if (target) {
+                    target.classList.add('active');
+                    target.scrollTo(0, 0);
+                }
+            }, 100);
+        }
+
+        function backToHub() {
+            document.querySelectorAll('.page-transition').forEach(p => p.classList.remove('active'));
+            setTimeout(() => {
+                const hub = document.getElementById('page-dashboard');
+                if (hub) hub.classList.add('active');
+                document.getElementById('player-ui')?.classList.remove('playing');
+            }, 100);
+        }
+
+        function initInfiniteGallery() {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+            grid.innerHTML = ''; 
+            for (let i = 1; i <= 500; i++) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'tape-photo w-full aspect-square flex items-center justify-center';
+                wrapper.style.transform = `rotate(${(Math.random() * 6 - 3).toFixed(1)}deg)`;
+                
+                const img = document.createElement('img');
+                img.src = `${i}.jpg`;
+                img.loading = "lazy";
+                img.className = 'gallery-image';
+                
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'w-full h-full photo-placeholder bg-rose-50 flex flex-col items-center justify-center';
+                    placeholder.innerHTML = `<i data-lucide="image" class="text-rose-100 w-4 h-4"></i><span class="text-[5px] text-rose-200 uppercase font-bold">#${i}</span>`;
+                    wrapper.appendChild(placeholder);
+                    lucide.createIcons();
+                };
+                wrapper.appendChild(img);
+                grid.appendChild(wrapper);
+            }
+        }
+
+        let playing = false;
+        function toggleMusic() {
+            playing = !playing;
+            const icon = document.getElementById('music-icon');
+            const player = document.getElementById('player-ui');
+            if (playing) player.classList.add('playing');
+            else player.classList.remove('playing');
+            icon.setAttribute('data-lucide', playing ? 'pause' : 'play');
+            lucide.createIcons();
+        }
+
+        function startFX() {
+            setInterval(() => {
+                const h = document.createElement('div');
+                h.className = 'bg-heart';
+                h.innerHTML = `<svg viewBox="0 0 24 24" width="12" height="12" fill="#fecdd3"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.animationDuration = (Math.random() * 5 + 4) + "s";
+                document.body.appendChild(h);
+                setTimeout(() => h.remove(), 8000);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
